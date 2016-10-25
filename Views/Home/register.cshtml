@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Register Page</title>
+</head>
+<body>
+    <h1>Register for the Wall</h1>
+    <form action="/createuser" method="post">
+        <ul>
+            <li>First Name: <input type="text" name="first_name"></li>
+            <li>Last Name: <input type="text" name="last_name"></li>
+            <li>Email: <input type="text" name="email"></li>
+            <li>Password: <input type="password" name="password"></li>
+            <li>Confirm Password: <input type="password" name="confirm_password"></li>
+            <li><input type="submit" value="Register"></li>
+        </ul>
+    </form>
+    <div>
+        @{
+            foreach(var error in ViewBag.errors)
+                {
+                    //If there are any errors for a field...
+                    if(@error.Errors.Count > 0)
+                    {
+                        // We show the first error for that field
+                        <p>@error.Errors[0].ErrorMessage</p>
+                    }
+                }
+        }
+    </div>
+    <hr>
+    <a href="/">Go Back</a>
+</body>
+</html>

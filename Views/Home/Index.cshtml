@@ -1,0 +1,12 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h1>The Wall</h1>
+<form action="/login" method="post">
+    Email: <input type="text" name="email">
+    Password: <input type="password" name="password">
+    <input type="submit" value="Log In">
+</form>
+<p>@ViewBag.errors</p>
+<hr>
+<a href="/register">Not Registered?</a>

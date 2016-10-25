@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>The Wall</title>
+</head>
+<body>
+    <h1>Welcome to the Wall @ViewBag.user</h1>
+    <span> | </span>
+    <a href="/logout">Log Out</a>
+    <hr>
+    <h3>Post a Message</h3>
+    <form action="/postmessage" method="post">
+        <textarea name="message" cols="50" rows="7"></textarea>
+        <input type="submit" value="Post a Message">
+    </form>
+    <div>
+        @{
+            foreach(var error in ViewBag.errors)
+                {
+                    //If there are any errors for a field...
+                    if(@error.Errors.Count > 0)
+                    {
+                        // We show the first error for that field
+                        <p>@error.Errors[0].ErrorMessage</p>
+                    }
+                }
+        }
+    </div>
+    <hr>
+    @{
+        foreach(var message in ViewBag.messages)
+        {
+            <p>@message.first_name - @message.created_at</p>
+            <p>- @message.message</p>
+            <br>
+            foreach(var comment in ViewBag.comments)
+            {
+               @if(comment.message_id == message.id)
+               {
+                   <p>-@comment.first_name says:  @comment.created_at</p>
+                   <p>---   @comment.comment</p>
+               } 
+            }
+            <form action="/postcomment/@message.id" method="post">
+                <p><b>Post a Comment</b><p>
+                <textarea name="comment"cols="40" rows="5"></textarea>
+                <input type="submit" value="Post a Comment">
+            </form>
+            <hr>
+        }
+    }
+</body>
+</html>
